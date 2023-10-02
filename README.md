@@ -1,3 +1,5 @@
-# Je mettrai toutes mes progressions ici
+# Training Fronten
 
-en html, css, et javascript
+## html, css, et javascript
+
+Je mettrai toutes mes progressions ici
