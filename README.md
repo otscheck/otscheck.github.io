@@ -1,4 +1,4 @@
-# Training Frontend :))))
+# Training Frontend ❤
 
 ## html, css, et javascript
 
