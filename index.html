@@ -1,18 +1,140 @@
+<!-- index.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OTSCHECK MEMORY GAME</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>S²UM | Principes SOLID</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <h1>Tous mes jeux de mémoire</h1>
-    <p>En cours de construction</p>
-    <img src="assets/images/construction.jpg" alt="sit en construction">
+  <header>
+    <h1>Principes SOLID</h1>
+    <p class="intro">Un principe par page. Design original. Pensé pour les devs modernes.</p>
+  </header>
+
+  <main>
+    <section class="principle-list">
+      <a href="singleResponsability.html" class="card">S - Responsabilité Unique</a>
+      <!-- Les autres principes viendront plus tard -->
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Otscheck. Code sobre, solide, utile, mobile.</p>
+  </footer>
 </body>
 
 </html>
+
+<!-- style.css -->
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  background: linear-gradient(to right, #0f172a, #1e293b);
+  color: #f1f5f9;
+  padding: 2rem;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+h1 {
+  font-size: 3rem;
+  color: #60a5fa;
+}
+
+.intro {
+  font-size: 1.2rem;
+  color: #cbd5e1;
+}
+
+.principle-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.card {
+  background: #1e40af;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  background: #2563eb;
+}
+
+footer {
+  text-align: center;
+  margin-top: 5rem;
+  font-size: 0.9rem;
+  color: #94a3b8;
+}
+
+/* singleResponsability.html */
+<!-- singleResponsability.html -->
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Principe S - Responsabilité Unique</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <a href="index.html">&larr; Retour</a>
+  <header>
+    <h1>Responsabilité Unique</h1>
+  </header>
+
+  <main>
+    <section>
+      <h2>Définition</h2>
+      <p>Chaque module ou classe ne doit avoir qu'une seule raison de changer. C'est-à-dire qu'il ne doit avoir qu'une seule responsabilité bien définie.</p>
+
+      <h2>Exemple sans le principe (non SOLID)</h2>
+      <pre><code>// Mauvais exemple
+class Rapport {
+  generatePDF() { /* générer le PDF */ }
+  saveToFile() { /* enregistrer le fichier */ }
+  sendByEmail() { /* envoyer le mail */ }
+}</code></pre>
+
+      <h2>Exemple corrigé (SOLID)</h2>
+      <pre><code>// Bon exemple
+class Rapport {
+  generatePDF() { /* générer le PDF */ }
+}
+
+class FichierManager {
+  saveToFile(rapport) { /* enregistrer */ }
+}
+
+class EmailService {
+  send(rapport) { /* envoyer */ }
+}</code></pre>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Otscheck — S²UM first.</p>
+  </footer>
+</body>
+
+</html>
+
+<!-- script.js (optionnel pour plus tard) -->
+console.log("Site S2UM chargé avec succès.");
