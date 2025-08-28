@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,19 +9,24 @@
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../style.css">
 </head>
-
 <body>
-  <!-- Les particules et formes seront générées automatiquement par layout.js -->
-  <!-- Le contenu sera généré automatiquement par content.js -->
+  <!-- Particules flottantes -->
+  <div class="particle" style="left: 16%; animation-delay: 1s;"></div>
+  <div class="particle" style="left: 26%; animation-delay: 3s;"></div>
+  <div class="particle" style="left: 36%; animation-delay: 5s;"></div>
+  <div class="particle" style="left: 46%; animation-delay: 7s;"></div>
+  <div class="particle" style="left: 56%; animation-delay: 9s;"></div>
+  <div class="particle" style="left: 66%; animation-delay: 11s;"></div>
+  <div class="particle" style="left: 76%; animation-delay: 13s;"></div>
+  <div class="particle" style="left: 86%; animation-delay: 15s;"></div>
 
-  <script src="../layout.js"></script>
-  <script src="../content.js"></script>
+  <!-- Formes géométriques -->
   <div class="shape triangle" style="top: 32%; left: 18%;"></div>
   <div class="shape square" style="top: 72%; right: 28%;"></div>
   <div class="shape circle" style="top: 52%; left: 82%;"></div>
   <div class="shape triangle" style="top: 42%; right: 18%;"></div>
 
-  <a href="index.html" class="back-link">&larr; Retour</a>
+  <a href="../index.html" class="back-link">&larr; Retour</a>
   <header>
     <h1>Inversion des Dépendances</h1>
   </header>
@@ -30,17 +34,13 @@
   <main>
     <section>
       <h2>Définition</h2>
-
       <p>Les modules de haut niveau ne doivent pas dépendre des modules de bas niveau. Les deux doivent dépendre d'abstractions.</p>
-
       <p>Les abstractions ne doivent pas dépendre des détails. Les détails doivent dépendre des abstractions.</p>
 
       <h2>Pourquoi c'est important ?</h2>
-
       <p>Ce principe permet de créer du code plus flexible, testable et maintenable en inversant les dépendances traditionnelles et en utilisant l'injection de dépendances.</p>
 
       <h2>Exemple qui viole le principe</h2>
-
       <pre><code>// Violation du principe DIP
 class MySQLDatabase {
   connect() {
@@ -48,6 +48,138 @@ class MySQLDatabase {
   }
 
   query(sql: string) {
+    // Exécution requête MySQL
+  }
+}
+
+class UserService {
+  private db = new MySQLDatabase(); // Dépendance directe !
+
+  getUser(id: number) {
+    this.db.connect();
+    return this.db.query(`SELECT * FROM users WHERE id = ${id}`);
+  }
+}
+
+// Problèmes :
+// - UserService dépend directement de MySQLDatabase
+// - Impossible de changer de base de données sans modifier UserService
+// - Difficile à tester (dépend d'une vraie BDD)</code></pre>
+
+      <h2>Exemple corrigé (SOLID)</h2>
+      <pre><code>// Solution respectant DIP
+interface Database {
+  connect(): void;
+  query(sql: string): any;
+}
+
+class MySQLDatabase implements Database {
+  connect() {
+    // Connexion MySQL
+  }
+
+  query(sql: string) {
+    // Exécution requête MySQL
+  }
+}
+
+class PostgreSQLDatabase implements Database {
+  connect() {
+    // Connexion PostgreSQL
+  }
+
+  query(sql: string) {
+    // Exécution requête PostgreSQL
+  }
+}
+
+class UserService {
+  constructor(private db: Database) {} // Injection de dépendance !
+
+  getUser(id: number) {
+    this.db.connect();
+    return this.db.query(`SELECT * FROM users WHERE id = ${id}`);
+  }
+}
+
+// Utilisation avec injection de dépendances
+const mysqlDb = new MySQLDatabase();
+const postgresDb = new PostgreSQLDatabase();
+
+const userServiceMySQL = new UserService(mysqlDb);
+const userServicePostgres = new UserService(postgresDb);
+
+// Pour les tests
+class MockDatabase implements Database {
+  connect() {
+    // Mock de connexion
+  }
+
+  query(sql: string) {
+    // Retourne des données de test
+    return { id: 1, name: 'Test User' };
+  }
+}
+
+const mockDb = new MockDatabase();
+const userServiceTest = new UserService(mockDb); // Parfait pour les tests !</code></pre>
+
+      <h2>Avantages</h2>
+      <ul>
+        <li>✅ Code plus flexible et modulaire</li>
+        <li>✅ Facilite les tests unitaires avec des mocks</li>
+        <li>✅ Permet de changer d'implémentation facilement</li>
+        <li>✅ Réduit le couplage entre les composants</li>
+        <li>✅ Améliore la maintenabilité du code</li>
+      </ul>
+
+      <h2>Injection de Dépendances</h2>
+      <p>L'injection de dépendances est le mécanisme principal pour appliquer DIP :</p>
+
+      <h3>1. Injection par constructeur</h3>
+      <pre><code>class Service {
+  constructor(private dependency: DependencyInterface) {}
+}</code></pre>
+
+      <h3>2. Injection par setter</h3>
+      <pre><code>class Service {
+  private dependency: DependencyInterface;
+
+  setDependency(dependency: DependencyInterface) {
+    this.dependency = dependency;
+  }
+}</code></pre>
+
+      <h3>3. Injection par interface</h3>
+      <pre><code>interface ServiceInterface {
+  setDependency(dependency: DependencyInterface): void;
+}</code></pre>
+
+      <h2>Frameworks populaires</h2>
+      <p>De nombreux frameworks utilisent DIP :</p>
+      <ul>
+        <li><strong>Angular</strong> : Injection de dépendances intégrée</li>
+        <li><strong>Spring</strong> : Framework Java avec IoC container</li>
+        <li><strong>.NET Core</strong> : Service collection et DI</li>
+        <li><strong>Dagger</strong> : Librairie DI pour Android</li>
+      </ul>
+
+      <h2>Quand appliquer ce principe ?</h2>
+      <p>Appliquez DIP lorsque :</p>
+      <ul>
+        <li>Vous voulez rendre votre code testable</li>
+        <li>Vous prévoyez de changer d'implémentation</li>
+        <li>Vous voulez réduire le couplage</li>
+        <li>Vous utilisez des frameworks qui supportent l'injection de dépendances</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Otscheck. Code sobre, solide, utile, mobile.</p>
+  </footer>
+</body>
+</html>
     // Exécution requête MySQL
   }
 }

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,15 +9,43 @@
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
+<body>
+  <!-- Particules flottantes -->
+  <div class="particle" style="left: 15%; animation-delay: 0s;"></div>
+  <div class="particle" style="left: 25%; animation-delay: 2s;"></div>
+  <div class="particle" style="left: 35%; animation-delay: 4s;"></div>
+  <div class="particle" style="left: 45%; animation-delay: 6s;"></div>
+  <div class="particle" style="left: 55%; animation-delay: 8s;"></div>
+  <div class="particle" style="left: 65%; animation-delay: 10s;"></div>
+  <div class="particle" style="left: 75%; animation-delay: 12s;"></div>
+  <div class="particle" style="left: 85%; animation-delay: 14s;"></div>
 
-  <body>
-    <!-- Les particules et formes seront générées automatiquement par layout.js -->
-    <!-- Le contenu sera généré automatiquement par content.js -->
+  <!-- Formes géométriques -->
+  <div class="shape triangle" style="top: 25%; left: 10%;"></div>
+  <div class="shape circle" style="top: 70%; right: 15%;"></div>
+  <div class="shape square" style="top: 45%; left: 80%;"></div>
+  <div class="shape triangle" style="top: 60%; right: 5%;"></div>
+  <div class="shape circle" style="top: 35%; left: 3%;"></div>
 
-    <script src="layout.js"></script>
-    <script src="content.js"></script>
-    <script src="mode-switcher.js"></script>
-  </body>
+  <header>
+    <h1>S²UM</h1>
+    <p>Principes SOLID</p>
+    <p class="intro">Un principe par page. Design original. Pensées pour les devs modernes.</p>
+  </header>
 
+  <main>
+    <section class="principle-list">
+      <a href="pages/singleResponsability.html" class="card">S - Responsabilité Unique</a>
+      <a href="pages/openClosed.html" class="card">O - Ouvert/Fermé</a>
+      <a href="pages/liskovSubstitution.html" class="card">L - Substitution de Liskov</a>
+      <a href="pages/interfaceSegregation.html" class="card">I - Ségrégation des Interfaces</a>
+      <a href="pages/dependencyInversion.html" class="card">D - Inversion des Dépendances</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Otscheck. Code sobre, solide, utile, mobile.</p>
+  </footer>
+</body>
 </html>
 

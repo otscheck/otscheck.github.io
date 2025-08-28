@@ -1,24 +1,57 @@
 
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Principe S - Responsabilité Unique</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../style.css">
 </head>
-
 <body>
-  <!-- Les particules et formes seront générées automatiquement par layout.js -->
-  <!-- Le contenu sera généré automatiquement par content.js -->
+  <!-- Particules flottantes -->
+  <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+  <div class="particle" style="left: 20%; animation-delay: 2s;"></div>
+  <div class="particle" style="left: 30%; animation-delay: 4s;"></div>
+  <div class="particle" style="left: 40%; animation-delay: 6s;"></div>
+  <div class="particle" style="left: 50%; animation-delay: 8s;"></div>
+  <div class="particle" style="left: 60%; animation-delay: 10s;"></div>
+  <div class="particle" style="left: 70%; animation-delay: 12s;"></div>
+  <div class="particle" style="left: 80%; animation-delay: 14s;"></div>
+  <div class="particle" style="left: 90%; animation-delay: 16s;"></div>
 
-  <script src="../layout.js"></script>
-  <script src="../content.js"></script>
-  <script src="mode-switcher.js"></script>
+  <!-- Formes géométriques -->
+  <div class="shape triangle" style="top: 20%; left: 15%;"></div>
+  <div class="shape circle" style="top: 60%; right: 20%;"></div>
+  <div class="shape square" style="top: 40%; left: 70%;"></div>
+  <div class="shape triangle" style="top: 80%; right: 10%;"></div>
+  <div class="shape circle" style="top: 30%; left: 5%;"></div>
+
+  <a href="../index.html" class="back-link">&larr; Retour</a>
+  <header>
+    <h1>Responsabilité Unique</h1>
+  </header>
+  <main>
+    <section>
+      <h2>Définition</h2>
+      <p>Chaque module ou classe ne doit avoir qu'une seule raison de changer. C'est-à-dire qu'il ne doit avoir qu'une seule responsabilité bien définie.</p>
+      <h2>Pourquoi c'est important ?</h2>
+      <p>Ce principe est la base de la conception modulaire. En donnant une seule responsabilité à chaque classe, on obtient du code plus maintenable, testable et réutilisable.</p>
+      <h2>Exemple</h2>
+      <pre><code>// Mauvais exemple
+class Rapport {
+  generatePDF() {}
+  saveToFile() {}
+  sendByEmail() {}
+}
+// Bon exemple
+class Rapport {}
+class RapportPDF {}
+class RapportSaver {}
+class RapportMailer {}</code></pre>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 Otscheck. Code sobre, solide, utile, mobile.</p>
+  </footer>
 </body>
-
 </html>

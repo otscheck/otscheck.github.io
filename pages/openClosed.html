@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,13 +9,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../style.css">
 </head>
-
 <body>
-  <!-- Les particules et formes seront générées automatiquement par layout.js -->
-  <!-- Le contenu sera généré automatiquement par content.js -->
-
-  <script src="../layout.js"></script>
-  <script src="../content.js"></script>
+  <!-- Particules flottantes -->
   <div class="particle" style="left: 12%; animation-delay: 0.5s;"></div>
   <div class="particle" style="left: 22%; animation-delay: 2.5s;"></div>
   <div class="particle" style="left: 32%; animation-delay: 4.5s;"></div>
@@ -32,7 +26,7 @@
   <div class="shape circle" style="top: 45%; left: 75%;"></div>
   <div class="shape triangle" style="top: 55%; right: 8%;"></div>
 
-  <a href="index.html" class="back-link">&larr; Retour</a>
+  <a href="../index.html" class="back-link">&larr; Retour</a>
   <header>
     <h1>Ouvert/Fermé</h1>
   </header>
@@ -40,14 +34,74 @@
   <main>
     <section>
       <h2>Définition</h2>
-
       <p>Les entités logicielles (classes, modules, fonctions) doivent être <strong>ouvertes à l'extension</strong> mais <strong>fermées à la modification</strong>. Cela signifie qu'il devrait être possible d'ajouter de nouvelles fonctionnalités sans changer le code existant.</p>
 
       <h2>Pourquoi c'est important ?</h2>
-
       <p>Ce principe permet de créer du code plus stable et maintenable. Au lieu de modifier du code existant (risque d'introduire des bugs), on étend les fonctionnalités en ajoutant du nouveau code.</p>
 
       <h2>Exemple sans le principe (non SOLID)</h2>
+      <pre><code>// Mauvais exemple - modification du code existant
+class CalculateurSalaire {
+  calculerSalaire(employe) {
+    if (employe.type === 'developpeur') {
+      return employe.salaireBase * 1.2;
+    } else if (employe.type === 'manager') {
+      return employe.salaireBase * 1.5;
+    } else if (employe.type === 'stagiaire') {
+      return employe.salaireBase * 0.8;
+    }
+    // Chaque nouveau type nécessite une modification
+  }
+}</code></pre>
+
+      <h2>Exemple corrigé (SOLID)</h2>
+      <pre><code>// Bon exemple - extension sans modification
+interface Employe {
+  calculerSalaire(): number;
+}
+
+class Developpeur implements Employe {
+  constructor(private salaireBase: number) {}
+
+  calculerSalaire(): number {
+    return this.salaireBase * 1.2;
+  }
+}
+
+class Manager implements Employe {
+  constructor(private salaireBase: number) {}
+
+  calculerSalaire(): number {
+    return this.salaireBase * 1.5;
+  }
+}
+
+class Directeur implements Employe {
+  constructor(private salaireBase: number) {}
+
+  calculerSalaire(): number {
+    return this.salaireBase * 2.0;
+  }
+}</code></pre>
+
+      <h2>Avantages</h2>
+      <ul>
+        <li>✅ Code plus stable et moins de risques de régression</li>
+        <li>✅ Facilite l'ajout de nouvelles fonctionnalités</li>
+        <li>✅ Respecte le principe de responsabilité unique</li>
+        <li>✅ Améliore la testabilité du code</li>
+      </ul>
+
+      <h2>Quand l'appliquer ?</h2>
+      <p>Utilisez ce principe lorsque vous prévoyez que votre code devra évoluer ou accueillir de nouvelles fonctionnalités similaires à celles existantes.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Otscheck. Code sobre, solide, utile, mobile.</p>
+  </footer>
+</body>
+</html>
 
       <pre><code>// Mauvais exemple - modification du code existant
 class CalculateurSalaire {
